@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Nilai Mahasiswa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wadah">
+        <h2>Sistem Input Nilai Mahasiswa</h2>
+        
+        <div class="form-input">
+            <input type="text" id="nama" placeholder="Masukkan Nama Mahasiswa">
+            <input type="text" id="nim" placeholder="Masukkan NIM">
+            <input type="number" id="nilai" placeholder="Masukkan Nilai (0-100)">
+            <button onclick="prosesNilai()">Simpan Data</button>
+        </div>
+
+        <table id="tabel-nilai">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Nilai Angka</th>
+                    <th>Nilai Huruf</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="daftar-nilai">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
