@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Kasir</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="aplikasi-kasir">
+        <h2>Mesin Kasir Sederhana</h2>
+        
+        <div class="input-barang">
+            <input type="text" id="namaBarang" placeholder="Nama Barang">
+            <input type="number" id="hargaBarang" placeholder="Harga (Rp)">
+            <input type="number" id="jumlahBarang" placeholder="Qty" value="1" min="1">
+            <button onclick="tambahKeKeranjang()">Tambah</button>
+        </div>
+
+        <table id="tabel-keranjang">
+            <thead>
+                <tr>
+                    <th>Nama Barang</th>
+                    <th>Harga</th>
+                    <th>Qty</th>
+                    <th>Subtotal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="isi-keranjang">
+                </tbody>
+        </table>
+
+        <div class="pembayaran">
+            <h3>Total: Rp <span id="totalHarga">0</span></h3>
+            <div class="input-bayar">
+                <input type="number" id="uangBayar" placeholder="Uang Pelanggan (Rp)">
+                <button onclick="prosesPembayaran()" class="btn-bayar">Bayar</button>
+            </div>
+            <h3 id="teksKembalian" style="display: none;">Kembalian: Rp <span id="kembalian">0</span></h3>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
