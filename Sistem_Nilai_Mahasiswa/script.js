@@ -1,87 +1,68 @@
-// --- FUNGSI UTAMA MEMPROSES NILAI ---
-
-// Membuat fungsi bernama 'prosesNilai' yang akan berjalan saat tombol "Simpan Data" di-klik
 function prosesNilai() {
-    
-    // Mengambil teks yang diketik pengguna di kolom input "nama" menggunakan ID-nya
     let inputNama = document.getElementById("nama").value;
-    
-    // Mengambil teks yang diketik pengguna di kolom input "nim" menggunakan ID-nya
     let inputNim = document.getElementById("nim").value;
-    
-    // Mengambil angka yang diketik di kolom "nilai", lalu mengubahnya secara paksa menjadi tipe data angka desimal (parseFloat)
     let inputNilai = parseFloat(document.getElementById("nilai").value);
 
-    // Mengecek apakah ada kolom yang kosong (belum diisi) atau apakah nilai yang dimasukkan bukan angka
-    if (inputNama === "" || inputNim === "" || isNaN(inputNilai)) {
-        // Jika ada yang kosong, tampilkan peringatan (alert) kepada pengguna
-        alert("Harap isi semua data dengan benar!");
-        // Hentikan proses fungsi di sini agar data kosong tidak masuk ke tabel
+    // Validasi input standar kampus
+    if (inputNama.trim() === "" || inputNim.trim() === "" || isNaN(inputNilai)) {
+        alert("⚠️ Perhatian: Mohon lengkapi Nama, NIM, dan Nilai Angka dengan benar.");
         return; 
     }
 
-    // Mengecek apakah nilai angka yang dimasukkan berada di luar batas wajar (kurang dari 0 atau lebih dari 100)
     if (inputNilai < 0 || inputNilai > 100) {
-        // Jika tidak masuk akal, tampilkan peringatan
-        alert("Nilai harus berada di antara rentang 0 hingga 100!");
-        // Hentikan proses fungsi di sini
+        alert("⚠️ Perhatian: Nilai Angka harus berada dalam rentang 0 hingga 100.");
         return;
     }
 
-    // Mendeklarasikan variabel kosong untuk menampung huruf (A, B, C, D, E) nantinya
     let nilaiHuruf = "";
-    // Mendeklarasikan variabel kosong untuk menampung status ("Lulus" atau "Tidak Lulus") nantinya
-    let status = "";
+    let kelasHuruf = "";
+    let statusHTML = "";
 
-    // Memulai pengkondisian logika IF-ELSE untuk menentukan Nilai Huruf berdasarkan Nilai Angka
+    // Logika Penilaian Standar Akademik
     if (inputNilai >= 85) {
-        // Jika nilai 85 ke atas, dapat A
-        nilaiHuruf = "A";
+        nilaiHuruf = "A"; kelasHuruf = "huruf-a";
     } else if (inputNilai >= 75) {
-        // Jika nilai antara 75 sampai 84.9, dapat B
-        nilaiHuruf = "B";
+        nilaiHuruf = "B"; kelasHuruf = "huruf-b";
     } else if (inputNilai >= 60) {
-        // Jika nilai antara 60 sampai 74.9, dapat C
-        nilaiHuruf = "C";
+        nilaiHuruf = "C"; kelasHuruf = "huruf-c";
     } else if (inputNilai >= 50) {
-        // Jika nilai antara 50 sampai 59.9, dapat D
-        nilaiHuruf = "D";
+        nilaiHuruf = "D"; kelasHuruf = "huruf-d";
     } else {
-        // Jika nilai di bawah 50, dapat E
-        nilaiHuruf = "E";
+        nilaiHuruf = "E"; kelasHuruf = "huruf-e";
     }
 
-    // Menentukan Status kelulusan, jika hurufnya A, B, atau C maka Lulus, selain itu Tidak Lulus
+    // Penentuan Kelulusan (A, B, C Lulus)
     if (nilaiHuruf === "A" || nilaiHuruf === "B" || nilaiHuruf === "C") {
-        // Memberikan teks HTML dengan class 'lulus' agar warnanya menjadi hijau (diatur di CSS)
-        status = "<span class='lulus'>Lulus</span>";
+        statusHTML = `<span class="label label-lulus">LULUS</span>`;
     } else {
-        // Memberikan teks HTML dengan class 'tidak-lulus' agar warnanya menjadi merah (diatur di CSS)
-        status = "<span class='tidak-lulus'>Tidak Lulus</span>";
+        statusHTML = `<span class="label label-gagal">GAGAL</span>`;
     }
 
-    // Mengambil elemen HTML kerangka tabel ('daftar-nilai') tempat kita akan meletakkan data baru
     let tabel = document.getElementById("daftar-nilai");
+    let barisKosong = document.getElementById("baris-kosong");
+    
+    // Menghapus tulisan "Belum ada data" jika data pertama masuk
+    if (barisKosong) {
+        barisKosong.remove();
+    }
 
-    // Membuat baris baru di dalam tabel (tr = table row) menggunakan variabel teks HTML
-    let barisBaru = `
+    // Membuat baris baru dengan struktur tabel profesional
+    let barisBaruHTML = `
         <tr>
-            <td>${inputNama}</td>
-            <td>${inputNim}</td>
-            <td>${inputNilai}</td>
-            <td>${nilaiHuruf}</td>
-            <td>${status}</td>
+            <td><strong style="color: #111827; font-weight: 600;">${inputNama}</strong></td>
+            <td style="color: #4b5563;">${inputNim}</td>
+            <td class="col-angka" style="font-weight: 500;">${inputNilai}</td>
+            <td class="col-huruf ${kelasHuruf}">${nilaiHuruf}</td>
+            <td class="col-status">${statusHTML}</td>
         </tr>
     `;
 
-    // Menyisipkan baris HTML baru tersebut ke dalam kerangka tabel yang sudah ada sebelumnya
-    // Operator '+=' berarti menambahkan tanpa menghapus data mahasiswa yang sudah diinput sebelumnya
-    tabel.innerHTML += barisBaru;
+    // Menambahkan baris ke dalam tabel (paling bawah)
+    tabel.insertAdjacentHTML('beforeend', barisBaruHTML);
 
-    // Menghapus kembali teks yang ada di dalam kolom input Nama agar pengguna bisa langsung input data baru
+    // Reset Form & Fokus kembali ke kolom Nama
     document.getElementById("nama").value = "";
-    // Menghapus kembali teks di dalam kolom input NIM
     document.getElementById("nim").value = "";
-    // Menghapus kembali teks di dalam kolom input Nilai
     document.getElementById("nilai").value = "";
+    document.getElementById("nama").focus();
 }

@@ -1,78 +1,335 @@
+/* --- RESET & GLOBAL STYLE --- */
+/* Reset dasar untuk menghapus margin dan padding default browser */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Gaya dasar untuk body */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    padding: 20px;
+    /* Font teks utama: sangat mudah dibaca */
+    font-family: 'Inter', sans-serif;
+    /* Abu-abu sangat muda bersih */
+    background-color: #f3f4f6;
+    /* Hitam keabu-abuan (bukan hitam pekat agar tidak kaku) */
+    color: #1f2937;
+    /* Jarak antar baris */
+    line-height: 1.5;
+    /* Memusatkan konten halaman */
     display: flex;
     justify-content: center;
+    /* Padding di sekeliling body */
+    padding: 30px 15px;
 }
 
-.wadah {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+/* Kontainer utama yang membungkus semua konten */
+.wrapper {
     width: 100%;
-    max-width: 600px;
+    max-width: 1150px;
 }
 
-h2 {
-    text-align: center;
-    color: #2c3e50;
+/* --- STYLE UNTUK HEADER (Formal & Akademik) --- */
+/* Header utama halaman */
+.main-header {
+    /* Putih bersih */
+    background-color: #ffffff;
+    /* Padding di dalam header */
+    padding: 25px 30px;
+    /* Sudut yang membulat */
+    border-radius: 12px;
+    /* Jarak bawah dari header */
+    margin-bottom: 25px;
+    /* Shadow sangat tipis */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* Garis aksen Biru Akademik di kiri */
+    border-left: 5px solid #1e40af;
+}
+
+/* Konten di dalam header */
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Logo universitas */
+.univ-logo {
+    font-size: 3rem;
+}
+
+/* Grup judul di header */
+.title-group h1 {
+    /* Font judul berkelas, formal, akademik */
+    font-family: 'DM Serif Display', serif;
+    /* Warna judul */
+    color: #111827;
+    /* Ukuran font judul */
+    font-size: 1.8rem;
+    /* Ketebalan font */
+    font-weight: 400;
+}
+
+.title-group p {
+    color: #6b7280;
+    font-size: 0.95rem;
+}
+
+/* Subjudul */
+
+/* --- GRID & PANEL STYLE (Solid Card) --- */
+/* Konten utama halaman */
+.main-content {
+    /* Layout flexbox untuk panel input dan data */
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+/* Panel umum */
+.panel {
+    /* Latar belakang putih */
+    background-color: #ffffff;
+    /* Sudut membulat */
+    border-radius: 12px;
+    /* Shadow tipis konsisten */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    /* Menyembunyikan konten yang meluap */
+    overflow: hidden;
+    /* Border tipis */
+    border: 1px solid #e5e7eb;
+}
+
+/* Header panel */
+.panel-header {
+    /* Abu-abu header sedikit lebih tua */
+    background-color: #f9fafb;
+    /* Padding */
+    padding: 15px 25px;
+    /* Garis bawah */
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.panel-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Gaya teks judul header panel */
+}
+
+/* Isi panel */
+.panel-body {
+    padding: 25px;
+}
+
+/* Panel untuk form input */
+.panel-input {
+    flex: 0 0 320px;
+}
+
+/* Lebar form tetap */
+/* Panel untuk tabel data */
+.panel-data {
+    flex: 1;
+}
+
+/* Tabel mengambil sisa ruang */
+
+/* --- FORM INPUT STYLE (Bersih & Kotak) --- */
+/* Field form */
+.form-field {
     margin-bottom: 20px;
 }
 
-.form-input {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 30px;
+/* Label untuk field form */
+.form-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #4b5563;
 }
 
-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* Input field */
+.form-field input {
+    /* Lebar dan padding */
+    width: 100%;
+    padding: 12px 15px;
+    /* Border solid */
+    border: 1px solid #d1d5db;
+    /* Sedikit melengkung saja */
+    border-radius: 8px;
+    /* Ukuran dan warna font */
     font-size: 1rem;
+    color: #1f2937;
+    /* Transisi halus */
+    transition: border-color 0.2s, box-shadow 0.2s;
+    /* Menggunakan font yang sama dengan body */
+    font-family: 'Inter', sans-serif;
 }
 
-button {
-    padding: 10px;
-    background-color: #3498db;
+/* Gaya saat input field mendapatkan fokus */
+.form-field input:focus {
+    /* Menghapus outline default */
+    outline: none;
+    /* Biru cerah saat fokus */
+    border-color: #3b82f6;
+    /* Halo fokus yang tipis */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Tombol utama (biru solid) */
+.btn-primary {
+    /* Lebar dan padding */
+    width: 100%;
+    padding: 12px;
+    /* Biru Tua Akademik */
+    background-color: #1e40af;
+    /* Warna teks, tanpa border, sudut membulat */
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    /* Ukuran font, ketebalan, kursor */
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.3s;
+    /* Transisi halus */
+    transition: background-color 0.2s;
 }
 
-button:hover {
-    background-color: #2980b9;
+/* Efek hover pada tombol */
+.btn-primary:hover {
+    background-color: #1d4ed8;
 }
 
+/* --- TABEL DATA STYLE (Profesional) --- */
+/* Kontainer tabel untuk scrolling horizontal */
+.table-container {
+    overflow-x: auto;
+}
+
+/* Tabel dasar */
 table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 500px;
 }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+/* Sel header dan data */
+th,
+td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* Sel header tabel */
+th {
+    color: #6b7280;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Efek hover pada baris tabel */
+tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Efek hover baris sangat tipis */
+/* Menghapus border bawah pada baris terakhir */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Kolom dengan perataan tengah */
+.col-angka,
+.col-huruf,
+.col-status {
     text-align: center;
 }
 
-th {
-    background-color: #34495e;
+/* Status saat tabel kosong */
+.empty-state {
+    text-align: center;
+    padding: 40px !important;
+    color: #9ca3af;
+}
+
+.empty-state .icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* --- STYLE PIL NILAI & STATUS (Solid Color) --- */
+/* Label umum (untuk status dan nilai huruf) */
+.label {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+/* Status Lulus/Gagal Solid (Tidak transparan) */
+.label-lulus {
+    background-color: #10b981;
     color: white;
 }
 
-.lulus {
-    color: #27ae60;
-    font-weight: bold;
+/* Hijau Solid */
+.label-gagal {
+    background-color: #ef4444;
+    color: white;
 }
 
-.tidak-lulus {
-    color: #e74c3c;
-    font-weight: bold;
+/* Merah Solid */
+
+/* Warna per Huruf (Solid & Jelas) */
+.huruf-a {
+    color: #1e40af;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.huruf-b {
+    color: #166534;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.huruf-c {
+    color: #854d0e;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.huruf-d {
+    color: #9a3412;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.huruf-e {
+    color: #991b1b;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Responsif untuk perangkat mobile */
+@media (max-width: 768px) {
+    /* Mengubah arah flexbox menjadi kolom */
+    .main-content {
+        flex-direction: column;
+    }
+    /* Panel input mengambil lebar penuh */
+    .panel-input {
+        width: 100%;
+        flex: auto;
+    }
 }

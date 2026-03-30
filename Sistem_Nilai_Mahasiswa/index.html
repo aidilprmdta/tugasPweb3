@@ -1,37 +1,125 @@
+<!-- Mendefinisikan tipe dokumen sebagai HTML5 -->
 <!DOCTYPE html>
+<!-- Tag pembuka HTML dengan atribut bahasa Indonesia -->
 <html lang="id">
+<!-- Bagian kepala dokumen HTML -->
 <head>
+    <!-- Menentukan set karakter yang digunakan (UTF-8) -->
     <meta charset="UTF-8">
+    <!-- Mengatur viewport untuk desain responsif -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Nilai Mahasiswa</title>
+    <!-- Judul halaman -->
+    <title>Sistem Rekapitulasi Nilai Mahasiswa</title>
+    <!-- Menghubungkan ke Google Fonts untuk font 'DM Serif Display' dan 'Inter' -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Menghubungkan ke file stylesheet eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
+<!-- Bagian isi dari halaman web -->
 <body>
-    <div class="wadah">
-        <h2>Sistem Input Nilai Mahasiswa</h2>
-        
-        <div class="form-input">
-            <input type="text" id="nama" placeholder="Masukkan Nama Mahasiswa">
-            <input type="text" id="nim" placeholder="Masukkan NIM">
-            <input type="number" id="nilai" placeholder="Masukkan Nilai (0-100)">
-            <button onclick="prosesNilai()">Simpan Data</button>
-        </div>
 
-        <table id="tabel-nilai">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>NIM</th>
-                    <th>Nilai Angka</th>
-                    <th>Nilai Huruf</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="daftar-nilai">
-            </tbody>
-        </table>
+    <!-- Kontainer utama yang membungkus seluruh konten -->
+    <div class="wrapper">
+        <!-- Bagian header utama halaman -->
+        <header class="main-header">
+            <!-- Konten di dalam header -->
+            <div class="header-content">
+                <!-- Logo universitas (emoji) -->
+                <span class="univ-logo">🏫</span>
+                <!-- Grup untuk judul dan subjudul -->
+                <div class="title-group">
+                    <!-- Judul utama -->
+                    <h1>Sistem Nilai Akademik</h1>
+                    <!-- Subjudul -->
+                    <p>Fakultas Sains dan Teknologi - Tahun Ajaran 2026</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Konten utama halaman -->
+        <main class="main-content">
+            <!-- Panel untuk input data nilai -->
+            <section class="panel panel-input">
+                <!-- Header dari panel input -->
+                <div class="panel-header">
+                    <!-- Judul panel input -->
+                    <h3>Pencatatan Nilai Baru</h3>
+                </div>
+                <!-- Isi dari panel input -->
+                <div class="panel-body">
+                    <!-- Field untuk input nama -->
+                    <div class="form-field">
+                        <!-- Label untuk input nama -->
+                        <label for="nama">Nama Lengkap Mahasiswa</label>
+                        <!-- Input field untuk nama -->
+                        <input type="text" id="nama" placeholder="Misal: Aidil Pramadita" autocomplete="off">
+                    </div>
+                    <!-- Field untuk input NIM -->
+                    <div class="form-field">
+                        <!-- Label untuk input NIM -->
+                        <label for="nim">Nomor Induk Mahasiswa (NIM)</label>
+                        <!-- Input field untuk NIM -->
+                        <input type="text" id="nim" placeholder="Misal: 1225XXXXXX" autocomplete="off">
+                    </div>
+                    <!-- Field untuk input nilai -->
+                    <div class="form-field form-field-nilai">
+                        <!-- Label untuk input nilai -->
+                        <label for="nilai">Nilai Akhir (Skala 0-100)</label>
+                        <!-- Input field untuk nilai dengan tipe number -->
+                        <input type="number" id="nilai" placeholder="85" min="0" max="100">
+                    </div>
+                    <!-- Tombol untuk memproses dan menambahkan nilai ke rekapitulasi -->
+                    <button onclick="prosesNilai()" class="btn-primary">Tambahkan ke Rekapitulasi</button>
+                </div>
+            </section>
+
+            <!-- Panel untuk menampilkan data rekapitulasi nilai -->
+            <section class="panel panel-data">
+                <!-- Header dari panel data -->
+                <div class="panel-header header-tabel">
+                    <!-- Judul panel data -->
+                    <h3>Rekapitulasi Nilai Akhir</h3>
+                </div>
+                <!-- Kontainer untuk tabel agar bisa di-scroll jika terlalu lebar -->
+                <div class="table-container">
+                    <!-- Tabel untuk menampilkan data nilai -->
+                    <table id="tabel-nilai">
+                        <!-- Bagian kepala tabel -->
+                        <thead>
+                            <!-- Baris di kepala tabel -->
+                            <tr>
+                                <!-- Kolom header untuk nama -->
+                                <th class="col-nama">Nama Mahasiswa</th>
+                                <!-- Kolom header untuk NIM -->
+                                <th class="col-nim">NIM</th>
+                                <!-- Kolom header untuk nilai angka -->
+                                <th class="col-angka">Angka</th>
+                                <!-- Kolom header untuk nilai huruf -->
+                                <th class="col-huruf">Huruf</th>
+                                <!-- Kolom header untuk status kelulusan -->
+                                <th class="col-status">Status</th>
+                            </tr>
+                        </thead>
+                        <!-- Bagian isi tabel, tempat data nilai akan dimasukkan -->
+                        <tbody id="daftar-nilai">
+                            <!-- Baris yang ditampilkan saat tabel masih kosong -->
+                            <tr id="baris-kosong">
+                                <!-- Sel yang digabung mencakup 5 kolom -->
+                                <td colspan="5" class="empty-state">
+                                    <!-- Ikon (emoji) -->
+                                    <span class="icon">📑</span>
+                                    <!-- Pesan saat tabel kosong -->
+                                    <p>Belum ada data nilai yang diinputkan.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
     </div>
 
+    <!-- Menghubungkan ke file JavaScript eksternal -->
     <script src="script.js"></script>
 </body>
 </html>

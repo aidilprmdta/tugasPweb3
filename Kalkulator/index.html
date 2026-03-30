@@ -1,40 +1,40 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalkulator JavaScript</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="kalkulator">
-        <div id="layar" class="layar">0</div>
+<!DOCTYPE html> <!-- Mendefinisikan tipe dokumen sebagai HTML5 -->
+<html lang="id"> <!-- Memulai elemen html dan menetapkan bahasa ke Bahasa Indonesia -->
+<head> <!-- Membuka bagian head, berisi metadata dan link stylesheet -->
+    <meta charset="UTF-8"> <!-- Menetapkan set karakter ke UTF-8 untuk mendukung berbagai karakter -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mengatur viewport untuk desain responsif -->
+    <title>Kalkulator Sederhana</title> <!-- Menetapkan judul halaman yang akan tampil di tab browser -->
+    <link rel="stylesheet" href="style.css"> <!-- Menghubungkan file CSS eksternal untuk styling -->
+</head> <!-- Menutup bagian head -->
+<body> <!-- Membuka bagian body, berisi konten utama halaman -->
+    <div class="kalkulator"> <!-- Membuat sebuah div dengan kelas "kalkulator" sebagai wadah utama -->
+        <div id="layar" class="layar">0</div> <!-- Menampilkan layar kalkulator dengan nilai awal 0 -->
         
-        <div class="tombol-grid">
-            <button onclick="bersihkan()" class="tombol-clear">C</button>
-            <button onclick="pilihOperator('/')" class="tombol-operator">/</button>
-            <button onclick="pilihOperator('*')" class="tombol-operator">*</button>
-            <button onclick="pilihOperator('-')" class="tombol-operator">-</button>
+        <div class="tombol-grid"> <!-- Membuat sebuah div untuk grid tombol -->
+            <button onclick="bersihkan()" class="tombol-clear">C</button> <!-- Tombol untuk membersihkan layar (Clear) -->
+            <button onclick="pilihOperator('/')" class="tombol-operator">/</button> <!-- Tombol untuk operator bagi -->
+            <button onclick="pilihOperator('*')" class="tombol-operator">*</button> <!-- Tombol untuk operator kali -->
+            <button onclick="pilihOperator('-')" class="tombol-operator">-</button> <!-- Tombol untuk operator kurang -->
             
-            <button onclick="tambahAngka('7')">7</button>
-            <button onclick="tambahAngka('8')">8</button>
-            <button onclick="tambahAngka('9')">9</button>
-            <button onclick="pilihOperator('+')" class="tombol-operator" style="grid-row: span 2;">+</button>
+            <button onclick="tambahAngka('7')">7</button> <!-- Tombol untuk angka 7 -->
+            <button onclick="tambahAngka('8')">8</button> <!-- Tombol untuk angka 8 -->
+            <button onclick="tambahAngka('9')">9</button> <!-- Tombol untuk angka 9 -->
+            <button onclick="pilihOperator('+')" class="tombol-operator" style="grid-row: span 2;">+</button> <!-- Tombol untuk operator tambah, memanjang 2 baris -->
             
-            <button onclick="tambahAngka('4')">4</button>
-            <button onclick="tambahAngka('5')">5</button>
-            <button onclick="tambahAngka('6')">6</button>
+            <button onclick="tambahAngka('4')">4</button> <!-- Tombol untuk angka 4 -->
+            <button onclick="tambahAngka('5')">5</button> <!-- Tombol untuk angka 5 -->
+            <button onclick="tambahAngka('6')">6</button> <!-- Tombol untuk angka 6 -->
             
-            <button onclick="tambahAngka('1')">1</button>
-            <button onclick="tambahAngka('2')">2</button>
-            <button onclick="tambahAngka('3')">3</button>
-            <button onclick="hitung()" class="tombol-samadengan" style="grid-row: span 2;">=</button>
+            <button onclick="tambahAngka('1')">1</button> <!-- Tombol untuk angka 1 -->
+            <button onclick="tambahAngka('2')">2</button> <!-- Tombol untuk angka 2 -->
+            <button onclick="tambahAngka('3')">3</button> <!-- Tombol untuk angka 3 -->
+            <button onclick="hitung()" class="tombol-samadengan" style="grid-row: span 2;">=</button> <!-- Tombol sama dengan, untuk menghitung hasil, memanjang 2 baris -->
             
-            <button onclick="tambahAngka('0')" style="grid-column: span 2;">0</button>
-            <button onclick="tambahAngka('.')">.</button>
-        </div>
-    </div>
+            <button onclick="tambahAngka('0')" style="grid-column: span 2;">0</button> <!-- Tombol untuk angka 0, memanjang 2 kolom -->
+            <button onclick="tambahAngka('.')">.</button> <!-- Tombol untuk titik desimal -->
+        </div> <!-- Menutup div grid tombol -->
+    </div> <!-- Menutup div kalkulator -->
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script src="script.js"></script> <!-- Menghubungkan file JavaScript eksternal untuk fungsionalitas kalkulator -->
+</body> <!-- Menutup bagian body -->
+</html> <!-- Menutup elemen html -->

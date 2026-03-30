@@ -1,46 +1,168 @@
+<!-- Mendefinisikan tipe dokumen sebagai HTML5 -->
 <!DOCTYPE html>
+<!-- Tag pembuka HTML dengan atribut bahasa Indonesia -->
 <html lang="id">
+<!-- Bagian kepala dokumen HTML -->
 <head>
+    <!-- Menentukan set karakter yang digunakan (UTF-8 untuk karakter universal) -->
     <meta charset="UTF-8">
+    <!-- Mengatur viewport agar responsif di berbagai perangkat -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Kasir</title>
+    <!-- Judul halaman yang akan tampil di tab browser -->
+    <title>Suska Coffe Shop</title>
+    <!-- Menghubungkan file HTML dengan file CSS eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
+<!-- Bagian isi dari dokumen HTML yang akan ditampilkan di browser -->
 <body>
-    <div class="aplikasi-kasir">
-        <h2>Mesin Kasir Sederhana</h2>
+    <!-- Kontainer utama untuk seluruh elemen point of sale (POS) -->
+    <div class="container-pos">
         
-        <div class="input-barang">
-            <input type="text" id="namaBarang" placeholder="Nama Barang">
-            <input type="number" id="hargaBarang" placeholder="Harga (Rp)">
-            <input type="number" id="jumlahBarang" placeholder="Qty" value="1" min="1">
-            <button onclick="tambahKeKeranjang()">Tambah</button>
+        <!-- Area untuk menampilkan daftar menu yang tersedia -->
+        <div class="area-menu">
+            <!-- Judul untuk area menu -->
+            <h2>Menu Suska Coffe</h2>
+            
+            <!-- Judul untuk kategori makanan -->
+            <h3 class="judul-kategori">🍔 Kategori Makanan</h3>
+            <!-- Kontainer untuk menampilkan menu makanan dalam bentuk grid -->
+            <div class="grid-menu">
+                <!-- Tombol untuk menu Nasi Goreng Spesial -->
+                <button class="kartu-menu" onclick="tambahMenu('Nasi Goreng Spesial', 25000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">🍛</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Nasi Goreng Spesial</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 25.000</span>
+                </button>
+                <!-- Tombol untuk menu Mie Goreng Seafood -->
+                <button class="kartu-menu" onclick="tambahMenu('Mie Goreng Seafood', 28000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">🍜</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Mie Goreng Seafood</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 28.000</span>
+                </button>
+                <!-- Tombol untuk menu Ayam Bakar Madu -->
+                <button class="kartu-menu" onclick="tambahMenu('Ayam Bakar Madu', 35000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">🍗</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Ayam Bakar Madu</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 35.000</span>
+                </button>
+                <!-- Tombol untuk menu Sate Ayam Madura -->
+                <button class="kartu-menu" onclick="tambahMenu('Sate Ayam Madura', 20000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">🍢</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Sate Ayam Madura</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 20.000</span>
+                </button>
+            </div>
+
+            <!-- Judul untuk kategori minuman -->
+            <h3 class="judul-kategori">🥤 Kategori Minuman</h3>
+            <!-- Kontainer untuk menampilkan menu minuman dalam bentuk grid -->
+            <div class="grid-menu">
+                <!-- Tombol untuk menu Es Teh Manis -->
+                <button class="kartu-menu" onclick="tambahMenu('Es Teh Manis', 5000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">🍹</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Es Teh Manis</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 5.000</span>
+                </button>
+                <!-- Tombol untuk menu Es Jeruk Peras -->
+                <button class="kartu-menu" onclick="tambahMenu('Es Jeruk Peras', 10000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">🍊</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Es Jeruk Peras</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 10.000</span>
+                </button>
+                <!-- Tombol untuk menu Kopi Susu Gula Aren -->
+                <button class="kartu-menu" onclick="tambahMenu('Kopi Susu Gula Aren', 18000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">☕</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Kopi Susu Gula Aren</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 18.000</span>
+                </button>
+                <!-- Tombol untuk menu Jus Alpukat -->
+                <button class="kartu-menu" onclick="tambahMenu('Jus Alpukat', 15000)">
+                    <!-- Ikon untuk menu -->
+                    <span class="ikon">🥑</span>
+                    <!-- Nama menu -->
+                    <span class="nama-menu">Jus Alpukat</span>
+                    <!-- Harga menu -->
+                    <span class="harga-menu">Rp 15.000</span>
+                </button>
+            </div>
+            
         </div>
 
-        <table id="tabel-keranjang">
-            <thead>
-                <tr>
-                    <th>Nama Barang</th>
-                    <th>Harga</th>
-                    <th>Qty</th>
-                    <th>Subtotal</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="isi-keranjang">
-                </tbody>
-        </table>
-
-        <div class="pembayaran">
-            <h3>Total: Rp <span id="totalHarga">0</span></h3>
-            <div class="input-bayar">
-                <input type="number" id="uangBayar" placeholder="Uang Pelanggan (Rp)">
-                <button onclick="prosesPembayaran()" class="btn-bayar">Bayar</button>
+        <!-- Area untuk menampilkan pesanan pelanggan (keranjang) -->
+        <div class="area-keranjang">
+            <!-- Judul untuk area keranjang -->
+            <h2>🛒 Pesanan</h2>
+            
+            <!-- Kontainer untuk input nama pelanggan atau nomor meja -->
+            <div class="input-nama-pelanggan">
+                <!-- Input field untuk nama pelanggan -->
+                <input type="text" id="namaPelanggan" placeholder="Nama Pelanggan / Nomor Meja">
             </div>
-            <h3 id="teksKembalian" style="display: none;">Kembalian: Rp <span id="kembalian">0</span></h3>
+
+            <!-- Kontainer untuk menampilkan daftar pesanan yang telah ditambahkan -->
+            <div class="daftar-pesanan" id="isi-keranjang">
+                <!-- Teks yang ditampilkan jika belum ada pesanan -->
+                <p class="teks-kosong">Belum ada pesanan.</p>
+            </div>
+
+            <!-- Area untuk proses pembayaran -->
+            <div class="area-pembayaran">
+                <!-- Baris untuk menampilkan total tagihan -->
+                <div class="total-baris">
+                    <!-- Label untuk total tagihan -->
+                    <span>Total Tagihan:</span>
+                    <!-- Nilai total tagihan, awalnya 0 -->
+                    <strong>Rp <span id="totalHarga">0</span></strong>
+                </div>
+                
+                <!-- Kontainer untuk input nominal pembayaran -->
+                <div class="input-bayar">
+                    <!-- Input field untuk jumlah uang yang dibayarkan -->
+                    <input type="number" id="uangBayar" placeholder="Nominal Uang (Rp)">
+                    <!-- Tombol untuk memproses pembayaran -->
+                    <button class="btn-bayar" onclick="prosesPembayaran()">Bayar</button>
+                </div>
+                
+                <!-- Area untuk menampilkan kembalian, awalnya disembunyikan -->
+                <div class="total-baris" id="areaKembalian" style="display: none; color: #10b981; margin-top: 10px;">
+                    <!-- Label untuk kembalian -->
+                    <span>Kembalian:</span>
+                    <!-- Nilai kembalian -->
+                    <strong>Rp <span id="kembalian">0</span></strong>
+                </div>
+
+                <!-- Tombol untuk mencetak struk, awalnya disembunyikan -->
+                <button id="btnCetak" class="btn-cetak" onclick="cetakStruk()" style="display: none;">🖨️ Cetak Struk</button>
+            </div>
+
+            <!-- Area untuk pratinjau struk sebelum dicetak, awalnya disembunyikan -->
+            <div id="area-struk" class="struk-preview-screen" style="display: none;">
+                </div>
         </div>
     </div>
 
+    <!-- Menghubungkan file HTML dengan file JavaScript eksternal -->
     <script src="script.js"></script>
 </body>
 </html>

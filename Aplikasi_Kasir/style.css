@@ -1,93 +1,477 @@
+/* Mengatur gaya dasar untuk body dokumen */
 body {
+    /* Menentukan jenis font yang digunakan */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #e2e8f0;
+    /* Warna krem hangat seperti kopi susu */
+    background-color: #f3f0ea;
+    /* Menghapus margin default dari body */
+    margin: 0;
+    /* Memberi padding di sekeliling body */
+    padding: 20px;
+    /* Menggunakan model layout flexbox */
     display: flex;
+    /* Memusatkan konten secara horizontal */
     justify-content: center;
-    padding: 30px;
 }
 
-.aplikasi-kasir {
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 650px;
-}
-
-h2 {
-    text-align: center;
-    color: #1e293b;
-    margin-top: 0;
-}
-
-.input-barang, .input-bayar {
+/* Kontainer utama untuk aplikasi Point of Sale (POS) */
+.container-pos {
+    /* Menggunakan flexbox untuk layout anak-anaknya */
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-input {
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 5px;
-    flex: 1;
-}
-
-input[id="jumlahBarang"] {
-    flex: 0.3;
-}
-
-button {
-    padding: 10px 15px;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-button:hover {
-    background-color: #2563eb;
-}
-
-table {
+    /* Memberi jarak antara elemen anak */
+    gap: 20px;
+    /* Lebar kontainer 100% dari parent */
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+    /* Lebar maksimum kontainer */
+    max-width: 1000px;
+    /* Tinggi kontainer 85% dari tinggi viewport */
+    height: 85vh;
 }
 
-th, td {
-    border: 1px solid #e2e8f0;
-    padding: 10px;
-    text-align: center;
+/* --- Styling Area Menu Kiri --- */
+/* Area untuk menampilkan daftar menu di sebelah kiri */
+.area-menu {
+    /* Mengambil ruang 2 kali lebih besar dari area keranjang */
+    flex: 2;
+    /* Warna latar belakang putih */
+    background-color: white;
+    /* Padding di dalam area menu */
+    padding: 20px;
+    /* Membuat sudut menjadi lebih bulat */
+    border-radius: 12px;
+    /* Memberi efek bayangan */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Menambahkan scrollbar vertikal jika konten melebihi tinggi area */
+    overflow-y: auto;
 }
 
-th {
-    background-color: #f8fafc;
-    color: #475569;
+/* Judul di dalam area menu */
+.area-menu h2 {
+    /* Warna coklat kopi pekat */
+    color: #4a3b32;
+    /* Menghapus margin atas */
+    margin-top: 0;
+    /* Garis bawah untuk judul */
+    border-bottom: 2px solid #e5e5e5;
+    /* Jarak antara teks judul dan garis bawah */
+    padding-bottom: 10px;
 }
 
-.btn-hapus {
-    background-color: #ef4444;
-    padding: 5px 10px;
+/* Grid untuk menampilkan menu */
+.grid-menu {
+    /* Menggunakan layout grid */
+    display: grid;
+    /* Kolom grid yang responsif */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    /* Jarak antar item grid */
+    gap: 15px;
+    /* Jarak dari elemen di atasnya */
+    margin-top: 20px;
+}
+
+/* Kartu untuk setiap item menu */
+.kartu-menu {
+    /* Warna latar kartu */
+    background-color: #faf9f6;
+    /* Garis tepi kartu */
+    border: 1px solid #e0dcd3;
+    /* Sudut kartu yang bulat */
+    border-radius: 8px;
+    /* Padding di dalam kartu */
+    padding: 15px;
+    /* Menggunakan flexbox */
+    display: flex;
+    /* Menata item di dalam kartu secara vertikal */
+    flex-direction: column;
+    /* Memusatkan item secara horizontal */
+    align-items: center;
+    /* Mengubah kursor menjadi tangan saat di atas kartu */
+    cursor: pointer;
+    /* Efek transisi yang halus */
+    transition: 0.2s;
+}
+
+/* Efek saat kursor berada di atas kartu menu */
+.kartu-menu:hover {
+    /* Mengubah warna latar */
+    background-color: #f0ead6;
+    /* Mengubah warna border */
+    border-color: #c8b99e;
+    /* Menggeser kartu sedikit ke atas */
+    transform: translateY(-2px);
+}
+
+/* Ikon pada kartu menu */
+.kartu-menu .ikon {
+    /* Ukuran font untuk ikon */
+    font-size: 2rem;
+    /* Jarak bawah dari ikon */
+    margin-bottom: 10px;
+}
+
+/* Nama menu pada kartu */
+.kartu-menu .nama-menu {
+    /* Teks tebal */
+    font-weight: bold;
+    /* Warna teks */
+    color: #4a3b32;
+    /* Jarak bawah dari nama menu */
+    margin-bottom: 5px;
+}
+
+/* Harga menu pada kartu */
+.kartu-menu .harga-menu {
+    /* Warna teks harga */
+    color: #8b7355;
+    /* Ukuran font harga */
     font-size: 0.9rem;
 }
 
-.btn-hapus:hover {
-    background-color: #dc2626;
+/* --- Styling Area Keranjang Kanan --- */
+/* Area untuk menampilkan keranjang belanja di sebelah kanan */
+.area-keranjang {
+    /* Mengambil ruang 1 kali (setengah dari area menu) */
+    flex: 1;
+    /* Warna latar belakang putih */
+    background-color: white;
+    /* Padding di dalam area keranjang */
+    padding: 20px;
+    /* Sudut yang bulat */
+    border-radius: 12px;
+    /* Efek bayangan */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    /* Menggunakan flexbox */
+    display: flex;
+    /* Menata item secara vertikal */
+    flex-direction: column;
 }
 
-.pembayaran {
-    border-top: 2px dashed #cbd5e1;
-    padding-top: 15px;
+/* Judul di area keranjang */
+.area-keranjang h2 {
+    /* Warna teks judul */
+    color: #4a3b32;
+    /* Menghapus margin atas */
+    margin-top: 0;
 }
 
+/* Daftar pesanan di dalam keranjang */
+.daftar-pesanan {
+    /* Mengambil sisa ruang yang tersedia */
+    flex: 1;
+    /* Scrollbar vertikal jika perlu */
+    overflow-y: auto;
+    /* Garis putus-putus di atas */
+    border-top: 1px dashed #ccc;
+    /* Garis putus-putus di bawah */
+    border-bottom: 1px dashed #ccc;
+    /* Padding atas dan bawah */
+    padding: 10px 0;
+    /* Jarak bawah */
+    margin-bottom: 15px;
+}
+
+/* Teks yang ditampilkan saat keranjang kosong */
+.teks-kosong {
+    /* Teks rata tengah */
+    text-align: center;
+    /* Warna teks abu-abu */
+    color: #999;
+    /* Teks miring */
+    font-style: italic;
+}
+
+/* Item pesanan individual di dalam daftar */
+.item-pesanan {
+    /* Menggunakan flexbox */
+    display: flex;
+    /* Menyebar item ke ujung */
+    justify-content: space-between;
+    /* Menata item secara vertikal di tengah */
+    align-items: center;
+    /* Padding atas dan bawah */
+    padding: 8px 0;
+    /* Garis bawah tipis */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Detail item pesanan (paragraf) */
+.detail-item p {
+    /* Menghapus margin default paragraf */
+    margin: 0;
+    /* Ukuran font */
+    font-size: 0.9rem;
+}
+
+/* Nama item di detail pesanan */
+.detail-item .nama {
+    /* Teks tebal */
+    font-weight: bold;
+    /* Warna teks */
+    color: #333;
+}
+
+/* Subtotal item di detail pesanan */
+.detail-item .subtotal {
+    /* Warna teks */
+    color: #666;
+}
+
+/* Tombol untuk mengurangi item pesanan */
+.btn-kurang {
+    /* Warna latar tombol */
+    background-color: #ff4757;
+    /* Warna teks tombol */
+    color: white;
+    /* Tanpa border */
+    border: none;
+    /* Sudut tombol yang bulat */
+    border-radius: 4px;
+    /* Padding di dalam tombol */
+    padding: 5px 10px;
+    /* Kursor tangan saat di atas tombol */
+    cursor: pointer;
+}
+
+/* Area pembayaran di bagian bawah keranjang */
+.area-pembayaran {
+    /* Warna latar */
+    background-color: #faf9f6;
+    /* Padding */
+    padding: 15px;
+    /* Sudut bulat */
+    border-radius: 8px;
+}
+
+/* Baris untuk menampilkan total */
+.total-baris {
+    /* Menggunakan flexbox */
+    display: flex;
+    /* Menyebar item ke ujung */
+    justify-content: space-between;
+    /* Ukuran font */
+    font-size: 1.1rem;
+    /* Jarak bawah */
+    margin-bottom: 15px;
+}
+
+/* Kontainer untuk input pembayaran */
+.input-bayar {
+    /* Menggunakan flexbox */
+    display: flex;
+    /* Jarak antara input field dan tombol */
+    gap: 10px;
+}
+
+/* Input field untuk nominal pembayaran */
+.input-bayar input {
+    /* Mengambil sisa ruang */
+    flex: 1;
+    /* Padding */
+    padding: 10px;
+    /* Border */
+    border: 1px solid #ccc;
+    /* Sudut bulat */
+    border-radius: 6px;
+}
+
+/* Tombol bayar */
 .btn-bayar {
-    background-color: #10b981;
+    /* Warna latar hijau */
+    background-color: #2ed573;
+    /* Warna teks putih */
+    color: white;
+    /* Tanpa border */
+    border: none;
+    /* Sudut bulat */
+    border-radius: 6px;
+    /* Padding */
+    padding: 10px 15px;
+    /* Teks tebal */
+    font-weight: bold;
+    /* Kursor tangan */
+    cursor: pointer;
 }
 
+/* Efek saat kursor di atas tombol bayar */
 .btn-bayar:hover {
-    background-color: #059669;
+    /* Warna latar menjadi lebih gelap */
+    background-color: #27ae60;
+}
+
+/* --- Tambahan Styling Untuk Input Nama dan Tombol --- */
+/* Input untuk nama pelanggan */
+.input-nama-pelanggan input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    /* Lebar, padding, margin, border */
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-weight: bold;
+    /* Sudut, model box, tebal teks */
+}
+
+/* Tombol untuk mencetak struk */
+.btn-cetak {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    /* Warna, teks, border, sudut */
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 1rem;
+    /* Padding, tebal, kursor, lebar, margin, ukuran font */
+}
+
+/* Efek saat kursor di atas tombol cetak */
+.btn-cetak:hover {
+    background-color: #2563eb;
+}
+
+/* Warna latar menjadi lebih gelap */
+
+
+/* ========================================================== */
+/* =    LOGIKA BARU: STYLING STRUK (SCREEN vs PRINT)     = */
+/* ========================================================== */
+
+/* --- 1. Styling Struk saat terlihat di LAYAR (Preview) --- */
+/* Pratinjau struk di layar sebelum dicetak */
+.struk-preview-screen {
+    /* Desain agar terlihat seperti kertas thermal melayang */
+    /* Warna putih kertas agak krem */
+    background-color: #fffef0;
+    /* Memenuhi lebar area kanan */
+    width: 100%;
+    /* Tapi jangan terlalu lebar */
+    max-width: 320px;
+    /* Rata tengah, margin atas */
+    margin: 20px auto 0;
+    /* Padding */
+    padding: 20px;
+    /* Bayangan agar terlihat realistis */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* Sudut bulat */
+    border-radius: 4px;
+    /* Font mesin kasir */
+    /* Font monospace seperti mesin ketik */
+    font-family: 'Courier New', Courier, monospace;
+    /* Warna teks */
+    color: #333;
+    /* Ukuran font */
+    font-size: 13px;
+    /* Model box */
+    box-sizing: border-box;
+}
+
+/* Styling elemen internal struk (berlaku di layar & print) */
+/* Header struk: rata tengah, margin bawah */
+.struk-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Judul di header struk */
+.struk-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #4a3b32;
+}
+
+/* Paragraf di header struk */
+.struk-header p {
+    margin: 2px 0;
+    font-size: 11px;
+}
+
+/* Garis pemisah putus-putus */
+.struk-garis {
+    border-top: 1px dashed #999;
+    margin: 10px 0;
+}
+
+/* Item pada struk */
+.struk-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+/* Footer struk: rata tengah, margin atas */
+.struk-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 11px;
+    color: #666;
+}
+
+
+/* --- 2. Styling Khusus saat DICETAK (Media Print) --- */
+@media print {
+    /* Sembunyikan semua elemen UI aplikasi (menu, tombol, input) */
+    body * {
+        /* Sembunyikan semua elemen di body */
+        visibility: hidden;
+        /* Paksa background putih agar hemat tinta */
+        background-color: white !important;
+    }
+    /* Tampilkan HANYA elemen area struk */
+    #area-struk,
+    #area-struk * {
+        /* Tampilkan hanya area struk dan isinya */
+        visibility: visible;
+    }
+    /* Atur ulang posisi struk untuk printer kertas thermal */
+    #area-struk {
+        /* Posisi absolut */
+        position: absolute;
+        /* Rata kiri */
+        left: 0;
+        /* Rata atas */
+        top: 0;
+        /* Lebar standar kertas thermal */
+        width: 80mm;
+        /* Hapus styling preview layar (bayangan, margin, background krem) */
+        /* Hapus bayangan */
+        box-shadow: none !important;
+        /* Hapus margin */
+        margin: 0 !important;
+        /* Atur ulang padding */
+        padding: 10px !important;
+        /* Pastikan latar putih */
+        background-color: white !important;
+        /* Hapus border */
+        border: none !important;
+        /* Paksa teks jadi hitam pekat */
+        /* Warna teks hitam */
+        color: black !important;
+        /* Ukuran font sedikit lebih kecil untuk print */
+        font-size: 12px;
+    }
+    /* Pastikan garis putus-putus berwarna hitam saat dicetak */
+    .struk-garis {
+        border-top: 1px dashed black !important;
+    }
+    /* Garis pemisah menjadi hitam */
+}
+
+/* --- Tambahan Styling Judul Kategori Makanan & Minuman --- */
+.judul-kategori {
+    /* Warna orange kemerahan agar kontras dan membangkitkan selera makan */
+    color: #d35400;
+    /* Jarak atas */
+    margin-top: 25px;
+    /* Jarak bawah */
+    margin-bottom: 10px;
+    /* Ukuran font */
+    font-size: 1.2rem;
+    /* Garis bawah */
+    border-bottom: 2px solid #e5e5e5;
+    /* Jarak antara teks dan garis bawah */
+    padding-bottom: 5px;
 }

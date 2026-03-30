@@ -1,104 +1,188 @@
-// Mendeklarasikan sebuah array kosong untuk menampung daftar barang yang diinput ke keranjang
-let keranjangBelanja = [];
+// Array untuk menyimpan daftar menu yang dipesan
+let pesanan = [];
 
-// Membuat fungsi untuk memasukkan data barang baru ke dalam keranjang
-function tambahKeKeranjang() {
-    // Mengambil teks nama barang dari kolom input HTML
-    let nama = document.getElementById('namaBarang').value;
+// Fungsi ini dipanggil setiap kali tombol menu kopi ditekan
+function tambahMenu(namaItem, hargaItem) {
     
-    // Mengambil nilai harga dari input HTML dan mengubahnya menjadi angka desimal (float)
-    let harga = parseFloat(document.getElementById('hargaBarang').value);
-    
-    // Mengambil jumlah barang dari input HTML dan mengubahnya menjadi angka bulat (integer)
-    let jumlah = parseInt(document.getElementById('jumlahBarang').value);
+    // MENGGUNAKAN METODE FIND: 
+    // Mencari apakah minuman yang diklik sudah ada di dalam keranjang pesanan
+    let itemSudahAda = pesanan.find(function(item) {
+        return item.nama === namaItem;
+    });
 
-    // Mengecek apakah input nama kosong, atau harga bukan angka, atau jumlah di bawah 1
-    if (nama === '' || isNaN(harga) || isNaN(jumlah) || jumlah < 1) {
-        alert("Harap masukkan nama, harga, dan jumlah barang yang valid!");
-        return;
+    if (itemSudahAda) {
+        // Jika minumannya sudah ada, tambahkan saja jumlahnya (Qty) + 1
+        itemSudahAda.jumlah += 1;
+        // Hitung ulang subtotal untuk minuman tersebut
+        itemSudahAda.subtotal = itemSudahAda.jumlah * itemSudahAda.harga;
+    } else {
+        // Jika minumannya belum ada di keranjang, masukkan sebagai data baru
+        pesanan.push({
+            nama: namaItem,
+            harga: hargaItem,
+            jumlah: 1,
+            subtotal: hargaItem
+        });
     }
 
-    // Menghitung subtotal untuk barang ini (harga dikali jumlah barang)
-    let subtotal = harga * jumlah;
-
-    // Menggabungkan data-data tersebut ke dalam satu objek JavaScript
-    let barangBaru = {
-        nama: nama,
-        harga: harga,
-        jumlah: jumlah,
-        subtotal: subtotal
-    };
-
-    // Memasukkan objek barang baru tersebut ke dalam array keranjangBelanja
-    keranjangBelanja.push(barangBaru);
-
-    // Mengosongkan kembali kolom input di tampilan web
-    document.getElementById('namaBarang').value = '';
-    document.getElementById('hargaBarang').value = '';
-    document.getElementById('jumlahBarang').value = '1';
-
-    // Memanggil fungsi untuk memperbarui tampilan tabel keranjang di layar
+    // Perbarui layar struk pesanan di kanan
     perbaruiTampilanKeranjang();
 }
 
-// Membuat fungsi untuk menghapus barang dari keranjang berdasarkan urutannya (index)
-function hapusBarang(index) {
-    keranjangBelanja.splice(index, 1);
+// Fungsi untuk mengurangi atau menghapus item dari pesanan
+function kurangiItem(index) {
+    // Mengecek apakah jumlah item tersebut lebih dari 1
+    if (pesanan[index].jumlah > 1) {
+        // Jika lebih dari 1, kurangi jumlahnya 1
+        pesanan[index].jumlah -= 1;
+        // Hitung ulang subtotalnya
+        pesanan[index].subtotal = pesanan[index].jumlah * pesanan[index].harga;
+    } else {
+        // Jika jumlahnya sisa 1 dan ditekan kurangi, hapus item tersebut dari array
+        pesanan.splice(index, 1);
+    }
+    
+    // Perbarui layar
     perbaruiTampilanKeranjang();
 }
 
-// Membuat fungsi untuk mencetak isi array keranjangBelanja ke dalam tabel HTML
+// Fungsi utama untuk menggambar ulang daftar pesanan di HTML
 function perbaruiTampilanKeranjang() {
-    let isiKeranjang = document.getElementById('isi-keranjang');
-    isiKeranjang.innerHTML = '';
+    let wadahPesanan = document.getElementById('isi-keranjang');
+    wadahPesanan.innerHTML = ''; // Kosongkan tampilan dulu
     
     let totalKeseluruhan = 0;
 
-    // Memulai perulangan untuk mengekstrak setiap barang
-    for (let i = 0; i < keranjangBelanja.length; i++) {
-        let barang = keranjangBelanja[i];
-        totalKeseluruhan = totalKeseluruhan + barang.subtotal;
+    // Jika array pesanan kosong, tampilkan pesan kosong
+    if (pesanan.length === 0) {
+        wadahPesanan.innerHTML = '<p class="teks-kosong">Belum ada pesanan.</p>';
+        document.getElementById('totalHarga').innerText = '0';
+        document.getElementById('areaKembalian').style.display = 'none';
+        document.getElementById('btnCetak').style.display = 'none'; // Sembunyikan tombol cetak jika keranjang kosong
+        return; // Hentikan fungsi karena tidak ada yang perlu dihitung
+    }
 
-        let baris = `
-            <tr>
-                <td>${barang.nama}</td>
-                <td>Rp ${barang.harga}</td>
-                <td>${barang.jumlah}</td>
-                <td>Rp ${barang.subtotal}</td>
-                <td><button onclick="hapusBarang(${i})" class="btn-hapus">Hapus</button></td>
-            </tr>
+    // Melakukan perulangan untuk mencetak setiap item pesanan
+    for (let i = 0; i < pesanan.length; i++) {
+        let item = pesanan[i];
+        totalKeseluruhan += item.subtotal;
+
+        // Membuat elemen HTML untuk setiap pesanan (menggantikan tabel dengan list struk)
+        let barisItem = `
+            <div class="item-pesanan">
+                <div class="detail-item">
+                    <p class="nama">${item.nama} (x${item.jumlah})</p>
+                    <p class="subtotal">Rp ${item.subtotal}</p>
+                </div>
+                <button class="btn-kurang" onclick="kurangiItem(${i})">X</button>
+            </div>
         `;
         
-        isiKeranjang.innerHTML += baris;
+        wadahPesanan.innerHTML += barisItem;
     }
 
-    // Memperbarui total dan menyembunyikan kembalian
+    // Memperbarui angka total di layar
     document.getElementById('totalHarga').innerText = totalKeseluruhan;
-    document.getElementById('teksKembalian').style.display = 'none';
+    
+    // Menyembunyikan kembalian dan tombol cetak setiap kali ada perubahan pesanan
+    document.getElementById('areaKembalian').style.display = 'none';
+    document.getElementById('btnCetak').style.display = 'none'; 
 }
 
-// Membuat fungsi untuk memproses uang pembayaran pelanggan
+// Fungsi untuk memproses pembayaran
 function prosesPembayaran() {
-    let totalKeseluruhan = parseFloat(document.getElementById('totalHarga').innerText);
+    let teksTotal = document.getElementById('totalHarga').innerText;
+    let totalKeseluruhan = parseFloat(teksTotal);
     let uangBayar = parseFloat(document.getElementById('uangBayar').value);
 
-    // Pengecekan keamanan input
+    // Pengecekan standar
     if (totalKeseluruhan === 0) {
-        alert("Keranjang masih kosong!");
+        alert("Belum ada pesanan yang diinput!");
         return;
     }
 
-    if (isNaN(uangBayar)) {
-        alert("Masukkan nominal uang yang valid!");
+    if (isNaN(uangBayar) || uangBayar <= 0) {
+        alert("Masukkan nominal uang pembayaran dengan angka yang valid!");
         return;
     }
 
-    // Proses hitung kembalian
+    // Proses hitung
     if (uangBayar < totalKeseluruhan) {
-        alert("Uang pembayaran kurang!");
+        alert("Maaf, uang pembayaran kurang!");
     } else {
         let kembalian = uangBayar - totalKeseluruhan;
+        // Menampilkan angka kembalian ke layar
         document.getElementById('kembalian').innerText = kembalian;
-        document.getElementById('teksKembalian').style.display = 'block';
+        document.getElementById('areaKembalian').style.display = 'flex';
+        
+        // Menampilkan tombol cetak struk
+        document.getElementById('btnCetak').style.display = 'block';
+
+        // Membersihkan input kolom uang
+        document.getElementById('uangBayar').value = '';
     }
+}
+
+// Fungsi untuk mempersiapkan dan mencetak struk
+function cetakStruk() {
+    // Mengambil data dari layar
+    let namaPelanggan = document.getElementById('namaPelanggan').value || 'Pelanggan';
+    let totalTagihan = document.getElementById('totalHarga').innerText;
+    let kembalian = document.getElementById('kembalian').innerText;
+    let uangBayar = parseFloat(totalTagihan) + parseFloat(kembalian);
+
+    // Format tanggal dan waktu
+    let now = new Date();
+    let tanggal = now.toLocaleDateString('id-ID');
+    let waktu = now.toLocaleTimeString('id-ID');
+
+    // Membangun string HTML untuk daftar item di struk
+    let itemStrukHTML = '';
+    pesanan.forEach(item => {
+        itemStrukHTML += `
+            <div class="struk-item">
+                <span>${item.nama} (x${item.jumlah})</span>
+                <span>Rp ${item.subtotal}</span>
+            </div>
+        `;
+    });
+
+    // Template HTML lengkap untuk struk
+    let strukHTML = `
+        <div class="struk-header">
+            <h3>Suska Coffee</h3>
+            <p>Jl. Soebrantas No. 15, Panam, Pekanbaru</p>
+            <p>Tanggal: ${tanggal} | Waktu: ${waktu}</p>
+            <p>Kasir: Sky</p>
+            <p>Pelanggan: ${namaPelanggan}</p>
+        </div>
+        <div class="struk-garis"></div>
+        ${itemStrukHTML}
+        <div class="struk-garis"></div>
+        <div class="struk-item">
+            <strong>Total</strong>
+            <strong>Rp ${totalTagihan}</strong>
+        </div>
+        <div class="struk-item">
+            <span>Tunai</span>
+            <span>Rp ${uangBayar}</span>
+        </div>
+        <div class="struk-item">
+            <span>Kembalian</span>
+            <span>Rp ${kembalian}</span>
+        </div>
+        <div class="struk-footer">
+            <p>-- Terima Kasih --</p>
+            <p>Semoga harimu menyenangkan!</p>
+        </div>
+    `;
+
+    // Memasukkan template ke area preview struk
+    document.getElementById('area-struk').innerHTML = strukHTML;
+    
+    // Menampilkan area struk sebelum mencetak
+    document.getElementById('area-struk').style.display = 'block';
+
+    // Memanggil fungsi print bawaan browser
+    window.print();
 }
