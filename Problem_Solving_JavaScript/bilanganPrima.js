@@ -1,4 +1,4 @@
-// Membuat fungsi bernama 'cekBilanganPrima' yang menerima satu inputan (parameter) bernama 'angka'
+// Membuat fungsi bernama 'cekBilanganPrima' yang menerima satu inputan (parameter) bernama 'angka
 function cekBilanganPrima(angka) {
     // Memeriksa apakah angka yang dimasukkan kurang dari atau sama dengan 1
     if (angka <= 1) {
