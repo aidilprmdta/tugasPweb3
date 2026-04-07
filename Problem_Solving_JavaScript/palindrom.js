@@ -1,5 +1,3 @@
-// --- FUNGSI PENGECEKAN PALINDROM ---
-
 // Membuat fungsi bernama 'cekPalindrom' yang menerima satu masukan (parameter) bernama 'teks'
 function cekPalindrom(teks) {
     
