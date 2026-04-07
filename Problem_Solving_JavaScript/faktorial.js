@@ -1,5 +1,3 @@
-// --- FUNGSI MENGHITUNG FAKTORIAL ---
-
 // Membuat fungsi bernama 'hitungFaktorial' yang menerima satu masukan (parameter) bernama 'angka'
 function hitungFaktorial(angka) {
     
@@ -29,15 +27,11 @@ function hitungFaktorial(angka) {
         // Putaran 2: hasil = 5 * 4
         // Putaran 3: hasil = 20 * 3, dan seterusnya hingga i bernilai 1
         hasil = hasil * i;
-        
     }
 
     // Setelah perulangan selesai menghitung semuanya, kembalikan nilai akhir yang tersimpan di dalam 'hasil'
     return hasil;
 }
-
-
-// --- CONTOH PENGGUNAAN DAN PENGUJIAN KODE ---
 
 // Mendeklarasikan variabel 'angkaUji' dan memberinya nilai 5 untuk kita hitung
 let angkaUji = 5;
