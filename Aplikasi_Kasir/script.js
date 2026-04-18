@@ -3,8 +3,7 @@ let pesanan = [];
 
 // Fungsi ini dipanggil setiap kali tombol menu kopi ditekan
 function tambahMenu(namaItem, hargaItem) {
-    
-    // MENGGUNAKAN METODE FIND: 
+     
     // Mencari apakah minuman yang diklik sudah ada di dalam keranjang pesanan
     let itemSudahAda = pesanan.find(function(item) {
         return item.nama === namaItem;
@@ -151,7 +150,7 @@ function cetakStruk() {
     let strukHTML = `
         <div class="struk-header">
             <h3>Suska Coffee</h3>
-            <p>Jl. Soebrantas No. 15, Panam, Pekanbaru</p>
+            <p>Jl. Garuda Sakti KM 2, Panam, Pekanbaru</p>
             <p>Tanggal: ${tanggal} | Waktu: ${waktu}</p>
             <p>Kasir: Sky</p>
             <p>Pelanggan: ${namaPelanggan}</p>
